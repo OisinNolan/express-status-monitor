@@ -13,7 +13,8 @@ Chart.defaults.global.elements.line.backgroundColor = 'rgba(0,0,0,0)';
 Chart.defaults.global.elements.line.borderColor = 'rgba(0,0,0,0.9)';
 Chart.defaults.global.elements.line.borderWidth = 2;
 
-var socket = io(location.protocol + '//' + location.hostname + ':' + (port || location.port), {
+const backendUrl = parent.window['abairconfig.baseurl'].split('//')[1].split('/')[0];
+var socket = io(`ws://${backendUrl}`, {
     path: socketPath,
     transports: ["websocket"]
 });

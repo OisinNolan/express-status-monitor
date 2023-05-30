@@ -6,6 +6,7 @@ const validate = require('./helpers/validate');
 const onHeadersListener = require('./helpers/on-headers-listener');
 const socketIoInit = require('./helpers/socket-io-init');
 const healthChecker = require('./helpers/health-checker');
+const jwt = require('jsonwebtoken');
 
 const middlewareWrapper = config => {
   const validatedConfig = validate(config);
@@ -51,6 +52,11 @@ const middlewareWrapper = config => {
           }
         }
 
+        // TODO: we should update Access-Control-Allow-Origin to only accept requests
+        // from scealai client (should work better in prod, localhost causing some issues)
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+        res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
         res.send(render(data));
       });
     } else {

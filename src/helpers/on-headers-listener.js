@@ -5,7 +5,6 @@ module.exports = (statusCode, startTime, spans) => {
 
   spans.forEach(span => {
     const last = span.responses[span.responses.length - 1];
-
     if (last !== undefined && (last.timestamp / 1000) + span.interval > Date.now() / 1000) {
       last[category] += 1;
       last.count += 1;

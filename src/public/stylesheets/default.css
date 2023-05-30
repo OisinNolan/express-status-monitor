@@ -2,6 +2,10 @@
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
+body {
+  overflow: hidden;
+}
+
 body.hide-cpu .container.cpu,
 body.hide-mem .container.mem,
 body.hide-load .container.load,
