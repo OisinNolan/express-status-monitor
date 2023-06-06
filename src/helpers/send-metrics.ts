@@ -1,4 +1,4 @@
-module.exports = (io, span) => {
+export = (io, span) => {
   io.emit('esm_stats', {
     os: span.os[span.os.length - 2],
     responses: span.responses[span.responses.length - 2],

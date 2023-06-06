@@ -11,7 +11,7 @@ const jwt = require('jsonwebtoken');
 const middlewareWrapper = config => {
   const validatedConfig = validate(config);
   const bodyClasses = Object.keys(validatedConfig.chartVisibility)
-    .reduce((accumulator, key) => {
+    .reduce((accumulator: string[], key) => {
       if (validatedConfig.chartVisibility[key] === false) {
         accumulator.push(`hide-${key}`);
       }
@@ -25,7 +25,8 @@ const middlewareWrapper = config => {
     socketPath: validatedConfig.socketPath,
     bodyClasses,
     script: fs.readFileSync(path.join(__dirname, '/public/javascripts/app.js')),
-    style: fs.readFileSync(path.join(__dirname, '/public/stylesheets/', validatedConfig.theme))
+    style: fs.readFileSync(path.join(__dirname, '/public/stylesheets/', validatedConfig.theme)),
+    healthCheckResults: undefined,
   };
 
   const htmlTmpl = fs
@@ -90,4 +91,4 @@ const middlewareWrapper = config => {
   return middleware;
 };
 
-module.exports = middlewareWrapper;
+export = middlewareWrapper;

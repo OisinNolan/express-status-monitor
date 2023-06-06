@@ -1,4 +1,4 @@
-module.exports = {
+export = {
   title: 'Express Status',
   theme: 'default.css',
   path: '/status',
@@ -32,4 +32,4 @@ module.exports = {
   },
   ignoreStartsWith: '/admin',
   healthChecks: [],
-};
+} as const;

@@ -1,4 +1,4 @@
-module.exports = (statusCode, startTime, spans) => {
+export = (statusCode, startTime, spans) => {
   const diff = process.hrtime(startTime);
   const responseTime = ((diff[0] * 1e3) + diff[1]) * 1e-6;
   const category = Math.floor(statusCode / 100);

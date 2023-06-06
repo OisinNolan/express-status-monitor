@@ -14,7 +14,7 @@ const addSocketEvents = (socket, config) => {
   });
 };
 
-module.exports = (server, config) => {
+export = (server, config) => {
   if (io === null || io === undefined) {
     if (config.websocket !== null) {
       io = config.websocket;

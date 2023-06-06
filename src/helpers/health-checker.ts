@@ -1,6 +1,6 @@
 'use strict';
 
-const axios = require('axios');
+const axios = require('axios').default;
 
 function allSettled (promises) {
   const wrappedPromises = promises.map(p => Promise.resolve(p)
@@ -14,8 +14,8 @@ function allSettled (promises) {
 }
 
 
-module.exports = async healthChecks => {
-  const checkPromises = [];
+export = async (healthChecks: any[]) => {
+  const checkPromises: Promise<any>[] = [];
 
   (healthChecks || []).forEach(healthCheck => {
     let uri = `${healthCheck.protocol}://${healthCheck.host}`;
@@ -32,7 +32,7 @@ module.exports = async healthChecks => {
     }));
   });
 
-  const checkResults = [];
+  const checkResults: any[] = [];
 
   return allSettled(checkPromises).then(results => {
     results.forEach((result, index) => {
