@@ -13,9 +13,30 @@ Chart.defaults.global.elements.line.backgroundColor = 'rgba(0,0,0,0)';
 Chart.defaults.global.elements.line.borderColor = 'rgba(0,0,0,0.9)';
 Chart.defaults.global.elements.line.borderWidth = 2;
 
-const backendUrl = parent.window['abairconfig.baseurl'].split('//')[1].split('/')[0];
-var socket = io(`ws://${backendUrl}`, {
-    path: socketPath,
+
+const ref_window = parent.window || window;
+
+function websocket_protocol() {
+	const http_protocol = ref_window.location.protocol;
+	if(http_protocol === "https:") return "wss:";
+	return "ws:";
+}
+
+function websocket_url() {
+	return `${websocket_protocol()}//${ref_window.location.host}`;
+}
+
+console.log(window.location);
+console.log(window.location.host)
+console.log(parent.window);
+
+const backendUrl = websocket_url();;
+
+console.log(backendUrl);
+console.log(socketPath);
+
+var socket = io(backendUrl, {
+    path: '/api/socket.io',
     transports: ["websocket"]
 });
 var defaultSpan = 0;
